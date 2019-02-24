@@ -2,8 +2,64 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script type="text/javascript" lang="javascript">
+      const userAction = function(){
+        var urlEntered = document.getElementById('getUrl').value;
+        var mydiv = document.getElementById('url-return');
+        const http = new XMLHttpRequest();
+        const url = 'http://localhost:3000/api';
+        http.open("POST",url,true);
+        http.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        http.send(JSON.stringify(urlEntered));
+        http.onreadystatechange = (e) =>{
+          var myUrl = "http://localhost:3000/"+JSON.parse(http.responseText).url;
+          mydiv.innerHTML = "<center>"+myUrl+"</center>";
+        };
+      };
+    </script>
   </head>
+
   <body>
-      Hello World
+  <div class = "row">
+    <div class = "col-md-2 mt-3 mb-4">
+    </div>
+    <div class = "col-md-8 mt-3 mb-4">
+      <h3><center>Enter a URL to shorten below</center></h3>
+    </div>
+    <div class = "col-md-2 mt-3 mb-4">
+    </div>
+  </div>
+  <div class = 'row'>
+    <div class = "col-md-4">
+    </div>
+    <div class = "col-md-4">
+      <center>
+        <input type="url" id = 'getUrl' style="width : 40vw; height : 6vh;"></input>
+      </center>
+    </div>
+    <div class = "col-md-4">
+    </div>
+  </div>
+  <div class = 'row'>
+    <div class = "col-md-4 mt-4 mb-6">
+    </div>
+    <div class = "col-md-4 mt-4 mb-6">
+      <center><button class="btn btn-primary" onclick="userAction()">Submit</button></center>
+    </div>
+    <div class = "col-md-4 mt-4 mb-6">
+    </div>
+  </div>
+  <div class= 'row'>
+    <div class = "col-md-2 mt-3 mb-4">
+    </div>
+    <div class = "col-md-8 mt-3 mb-4">
+      <h3 id = "url-return"></h3>
+    </div>
+    <div class = "col-md-2 mt-3 mb-4">
+    </div>
+  </div>
   </body>
 </html>
